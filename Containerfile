@@ -6,4 +6,4 @@ COPY app ./app
 COPY tests ./app
 EXPOSE 8000
 ENTRYPOINT ["uvicorn", "app.main:app"]
-CMD ["--host", "0.0.0.0", "--port", "8080"]
+CMD ["--host", "0.0.0.0", "--port", "8000"]
