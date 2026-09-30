@@ -25,6 +25,26 @@ jobs:
      run : |
       pip install -r requirements.txt
 
-   - name : Run Tests
+   - name : Build Container
+     run : |
+      docker build -t fastapie2e -f Containerfile .
+
+   - name : Run FastAPI Container
+     run : |
+      docker run -d \
+      --name fastapi-container \
+      -p 8000:8000 \
+      fastapie2e
+
+   - name : Wait for application
+     run : |
+      sleep 5
+
+   - name : Run E2E
      run : |
       pytest -v
+
+   - name : Show Container logs
+     if : always()
+     run : |
+      docker logs fastapi-container
